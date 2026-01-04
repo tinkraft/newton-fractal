@@ -1,16 +1,16 @@
-# This is a sample Python script.
+import numpy as np
+from newtonfractal import plot_newton_fractal
+from fractalbox import box_counting
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+f = lambda z: z**3 - 1
+fprime = lambda z: 3 * z**2
 
+points = plot_newton_fractal(f, fprime, n=1000)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Define scales
+scales = np.logspace(-3, 0, num=50)
 
+result = box_counting(points, scales, method="original")
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+print("Fractal Dimension:", result["fd"])
+print("R²:", result["r_squared"])

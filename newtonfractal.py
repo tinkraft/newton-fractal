@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
+
+from fractalbox import box_counting
 
 TOL = 1.0e-8
 
@@ -58,9 +59,4 @@ def plot_newton_fractal(f, fprime, n=200, domain=(-1, 1, -1, 1)):
     plt.imshow(m, origin="lower")
     plt.axis("off")
     plt.show()
-
-
-f = lambda z: z**3 - 1
-fprime = lambda z: 3 * z**2
-
-plot_newton_fractal(f, fprime, n=1000)
+    return m
