@@ -2,9 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 
-# A list of colors to distinguish the roots.
-colors = ["b", "r", "g", "y"]
-
 TOL = 1.0e-8
 
 
@@ -58,19 +55,12 @@ def plot_newton_fractal(f, fprime, n=200, domain=(-1, 1, -1, 1)):
             if r is not False:
                 ir = get_root_index(roots, r)
                 m[iy, ix] = ir
-    nroots = len(roots)
-    if nroots > len(colors):
-        # Use a "continuous" colormap if there are too many roots.
-        cmap = "hsv"
-    else:
-        # Use a list of colors for the colormap: one for each root.
-        cmap = ListedColormap(colors[:nroots])
-    plt.imshow(m, cmap=cmap, origin="lower")
+    plt.imshow(m, origin="lower")
     plt.axis("off")
     plt.show()
 
 
-f = lambda z: z**4 - 1
-fprime = lambda z: 4 * z**3
+f = lambda z: z**3 - 1
+fprime = lambda z: 3 * z**2
 
-plot_newton_fractal(f, fprime, n=500)
+plot_newton_fractal(f, fprime, n=1000)
