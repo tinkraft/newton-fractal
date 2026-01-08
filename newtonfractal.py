@@ -33,6 +33,7 @@ def plot_newton_fractal(f, fprime, n=200, domain=(-1, 1, -1, 1)):
     """
 
     roots = []
+    rootCount = []
     m = np.zeros((n, n))
 
     def get_root_index(roots, r):
@@ -46,6 +47,7 @@ def plot_newton_fractal(f, fprime, n=200, domain=(-1, 1, -1, 1)):
             return np.where(np.isclose(roots, r, atol=TOL))[0][0]
         except IndexError:
             roots.append(r)
+            rootCount.append(0)
             return len(roots) - 1
 
     xmin, xmax, ymin, ymax = domain
@@ -56,7 +58,10 @@ def plot_newton_fractal(f, fprime, n=200, domain=(-1, 1, -1, 1)):
             if r is not False:
                 ir = get_root_index(roots, r)
                 m[iy, ix] = ir
+                rootCount[ir] += 1
     plt.imshow(m, origin="lower")
     plt.axis("off")
     plt.show()
+
+    print(rootCount)
     return m
