@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from numpy import roots
 
 from fractalbox import box_counting
 
@@ -23,7 +24,7 @@ def newton(z0, f, fprime, MAX_IT=1000):
     return False
 
 
-def plot_newton_fractal(f, fprime, n=200, domain=(-1, 1, -1, 1)):
+def plot_newton_fractal(f, fprime, n=200, domain=(-2, 2, -2, 2)):
     """Plot a Newton Fractal by finding the roots of f(z).
 
     The domain used for the fractal image is the region of the complex plane
@@ -59,6 +60,18 @@ def plot_newton_fractal(f, fprime, n=200, domain=(-1, 1, -1, 1)):
                 ir = get_root_index(roots, r)
                 m[iy, ix] = ir
                 rootCount[ir] += 1
+                # coords = np.argwhere(m)
+                # if len(coords) > 0:
+                #     avg_row = np.mean(coords[:, 0])
+                #     avg_col = np.mean(coords[:, 0])
+                #     centroid_x = r[avg_row]
+                #     centroid_y = r[avg_col]
+
+    for target in range(0, len(roots)):
+        coords = np.argwhere(m == target)
+        centroid_y, centroid_x = coords.mean(axis=0)
+        print(f"Centroid of R={target}: ({centroid_y}, {centroid_x})")
+
     plt.imshow(m, origin="lower")
     plt.axis("off")
     plt.show()
