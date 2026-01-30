@@ -70,7 +70,7 @@ def plot_newton_fractal(f, fprime, n=200, domain=(-2, 2, -2, 2)):
     for target in range(0, len(roots)):
         coords = np.argwhere(m == target)
         centroid_y, centroid_x = coords.mean(axis=0)
-        print(f"Centroid of R={target}: ({centroid_y}, {centroid_x})")
+        print(f"Centroid of R={target}: ({centroid_x}, {centroid_y})")
 
     plt.imshow(m, origin="lower")
     plt.axis("off")
